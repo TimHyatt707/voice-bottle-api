@@ -1,10 +1,16 @@
 exports.up = knex =>
-  knex.schema.createTable('users', (t) => {
-    t.increments('id');
-    t.string('username').notNullable();
-    t.string('email').notNullable();
-    t.string('hashed_password', 60).notNullable();
-    t.string('avatar_url');
-  });
+  knex.schema
+    .createTable('users', (t) => {
+      t.increments('id');
+      t.string('username').notNullable();
+      t.string('email').notNullable();
+      t.string('hashed_password', 60).notNullable();
+      t.string('avatar_url');
+    })
+    .then(() =>
+      knex.schema.alterTable('users', (t) => {
+        t.unique('email');
+        t.unique('username');
+      }));
 
 exports.down = knex => knex.schema.dropTable('users');

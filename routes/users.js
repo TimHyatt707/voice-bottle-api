@@ -6,11 +6,9 @@ const router = express.Router();
 
 const usersController = require('../instances/usersController');
 
-<<<<<<< HEAD
-router.get('/users/:userid(\\d+)/pins', usersController.getPins);
-=======
 router.get('/users/:userid(\\d+)/pins', usersController.getPinsByUser);
->>>>>>> fb5cf47... Added Controllers
+
+router.get('/users/:userid(\\d+)/pins', usersController.getPinsByUser);
 
 router.post('/signup', usersController.createUser);
 router.post('/users/:userid(\\d+)/pins', usersController.createPin);
