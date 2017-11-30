@@ -8,7 +8,7 @@ class UserRepository {
         .where('id', id)
         .returning('*');
       if (!record.length) throw new Error('User not found');
-      return [record];
+      return record[0];
     } catch (error) {
       if (error.message === 'User not found') throw new Error('User not found');
       else throw new Error('Something went wrong');
@@ -20,7 +20,7 @@ class UserRepository {
         .insert(credentials)
         .returning('*');
       if (!record.length) throw new Error('Username/email already exists');
-      return [record];
+      return record[0];
     } catch (error) {
       if (error.message === 'Username/email already exists') {
         throw new Error('Username/email already exists');
@@ -34,7 +34,7 @@ class UserRepository {
         .where('id', id)
         .returning('*');
       if (!record.length) throw new Error('User not found');
-      return [record];
+      return record[0];
     } catch (error) {
       if (error.message === 'User not found') throw new Error('User not found');
       else throw new Error('Something went wrong');
