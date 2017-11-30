@@ -19,7 +19,7 @@ class UpvoteService {
     try {
       const authentication = jwt.verify(token, secret.JWT_KEY);
       if (!authentication) throw new Error('Bad token');
-      const [upvote] = await this.upvoteRepository.create(authentication.sub, data);
+      const upvote = await this.upvoteRepository.create(authentication.sub, data);
       return upvote;
     } catch (error) {
       throw new Error(this.errorHandler(error));
@@ -29,9 +29,9 @@ class UpvoteService {
     try {
       const authentication = jwt.verify(token, secret.JWT_KEY);
       if (!authentication) throw new Error('Bad token');
-      const [upvote] = await this.upvoteRepository.getByUser(authentication.sub);
+      const upvote = await this.upvoteRepository.getByUser(authentication.sub);
       if (!upvote) throw new Error('Bad token');
-      const [deletedUpvote] = await this.upvoteRepository.delete(upvoteid);
+      const deletedUpvote = await this.upvoteRepository.delete(upvoteid);
       return deletedUpvote;
     } catch (error) {
       throw new Error(this.errorHandler(error));

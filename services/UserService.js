@@ -17,7 +17,7 @@ class UserService {
       const hashedPassword = await bcrypt.hash(credentials.password, 12);
       delete credentials.password;
       credentials.hashed_password = hashedPassword;
-      const [user] = await this.userRepository.create(credentials);
+      const user = await this.userRepository.create(credentials);
       delete user.hashed_password;
       return user;
     } catch (error) {
@@ -29,9 +29,9 @@ class UserService {
       const authentication = jwt.verify(token, secret.JWT_KEY);
       if (!authentication) throw new Error('Bad token');
       const id = authentication.sub;
-      const [verifiedUser] = await this.userRepository.getByUserId(id);
+      const verifiedUser = await this.userRepository.getByUserId(id);
       if (!verifiedUser) throw new Error('Bad token');
-      const [updatedUser] = await this.userRepository.update(id, changes);
+      const updatedUser = await this.userRepository.update(id, changes);
       delete updatedUser.hashed_password;
       return updatedUser;
     } catch (error) {

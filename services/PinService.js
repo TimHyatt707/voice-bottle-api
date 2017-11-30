@@ -31,7 +31,7 @@ class PinService {
       if (!authentication) throw new Error('Bad token');
       const id = authentication.sub;
       data.user_id = id;
-      const [pin] = await this.pinRepository.create(data);
+      const pin = await this.pinRepository.create(data);
       return pin;
     } catch (error) {
       throw new Error(this.errorHandler(error));
@@ -41,9 +41,9 @@ class PinService {
     try {
       const authentication = jwt.verify(token, secret.JWT_KEY);
       if (!authentication) throw new Error('Bad token');
-      const [pinVerification] = await this.pinRepository.getById(pinid);
+      const pinVerification = await this.pinRepository.getById(pinid);
       if (pinVerification.user_id !== authentication.sub) throw new Error('Bad token');
-      const [pin] = await this.pinRepository.update(pinid, changes);
+      const pin = await this.pinRepository.update(pinid, changes);
       return pin;
     } catch (error) {
       throw new Error(this.errorHandler(error));
@@ -53,9 +53,9 @@ class PinService {
     try {
       const authentication = jwt.verify(token, secret.JWT_KEY);
       if (authentication) throw new Error('Bad token');
-      const [pinVerification] = await this.pinRepository.getById(pinid);
+      const pinVerification = await this.pinRepository.getById(pinid);
       if (pinVerification.user_id !== authentication.sub) throw new Error('Bad token');
-      const [pin] = await this.pinRepository.delete(pinid);
+      const pin = await this.pinRepository.delete(pinid);
       return pin;
     } catch (error) {
       throw new Error(this.errorHandler(error));

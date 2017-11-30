@@ -10,7 +10,7 @@ class AuthenticationService {
       if (!credentials.username || !credentials.password) {
         throw new Error('Invalid username/password');
       }
-      const [user] = await this.userRepository.getByUsername(credentials.username);
+      const user = await this.userRepository.getByUsername(credentials.username);
       if (!user.length) {
         throw new Error('Invalid username/password');
       }
