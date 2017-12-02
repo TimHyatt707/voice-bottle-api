@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon",
-    "test": "jest",
+    "test": "mocha",
     "knex": "knex"
   },
   "repository": {
@@ -39,6 +39,7 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-react": "^7.5.1",
+    "jasmine": "^2.8.0",
     "jest": "^21.2.1",
     "mocha": "^4.0.1",
     "mock-knex": "^0.4.0",

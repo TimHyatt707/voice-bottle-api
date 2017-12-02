@@ -1,10 +1,15 @@
-const secret = require('./../env');
+const secret = require('../env');
 const jwt = require('jsonwebtoken');
 
 class PinService {
   constructor({ PinRepository }) {
     this.pinRepository = PinRepository;
     this.errorHandler = this.errorHandler.bind(this);
+    this.getPinsByUser = this.getPinsByUser.bind(this);
+    this.getPinsByLocation = this.getPinsByLocation.bind(this);
+    this.createPin = this.createPin.bind(this);
+    this.updatePin = this.updatePin.bind(this);
+    this.deletePin = this.deletePin.bind(this);
   }
   async getPinsByUser(token) {
     try {

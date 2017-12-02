@@ -7,8 +7,11 @@ class PinRepository {
       const records = await this.db('pins')
         .where('user_id', id)
         .returning('*');
+      console.log(id, records);
+      if (!records.length) throw new Error('Pin not found');
       return records;
     } catch (error) {
+      if (error.message === 'Pin not found') throw new Error('Pin not found');
       throw new Error('Something went wrong');
     }
   }

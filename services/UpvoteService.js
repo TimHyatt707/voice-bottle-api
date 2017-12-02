@@ -5,6 +5,9 @@ class UpvoteService {
   constructor({ UpvoteRepository }) {
     this.upvoteRepository = UpvoteRepository;
     this.errorHandler = this.errorHandler.bind(this);
+    this.getUpvotes = this.getUpvotes.bind(this);
+    this.createUpvote = this.createUpvote.bind(this);
+    this.deleteUpvote = this.deleteUpvote.bind(this);
   }
   async getUpvotes(pinid) {
     try {

@@ -1,9 +1,11 @@
 const bcrypt = require('bcryptjs');
 const secret = require('./../env');
+const jwt = require('jsonwebtoken');
 
 class AuthenticationService {
   constructor({ UserRepository }) {
     this.userRepository = UserRepository;
+    this.authenticate = this.authenticate.bind(this);
   }
   async authenticate(credentials) {
     try {
@@ -11,9 +13,6 @@ class AuthenticationService {
         throw new Error('Invalid username/password');
       }
       const user = await this.userRepository.getByUsername(credentials.username);
-      if (!user.length) {
-        throw new Error('Invalid username/password');
-      }
       const passwordCheck = await bcrypt.compare(credentials.password, user.hashed_password);
       if (!passwordCheck) {
         throw new Error('Invalid username/password');

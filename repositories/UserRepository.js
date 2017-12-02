@@ -14,6 +14,18 @@ class UserRepository {
       else throw new Error('Something went wrong');
     }
   }
+  async getByUsername(username) {
+    try {
+      const record = await this.db('users')
+        .where('username', username)
+        .returning('*');
+      if (!record.length) throw new Error('User not found');
+      return record[0];
+    } catch (error) {
+      if (error.message === 'User not found') throw new Error('User not found');
+      else throw new Error('Something went wrong');
+    }
+  }
   async create(credentials) {
     try {
       const record = await this.db('users')

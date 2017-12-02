@@ -5,19 +5,21 @@ const jwt = require('jsonwebtoken');
 class UserService {
   constructor({ UserRepository, UserValidator }) {
     this.userRepository = UserRepository;
-    this.UserValidator = UserValidator;
+    this.userValidator = UserValidator;
     this.errorHandler = this.errorHandler.bind(this);
+    this.createUser = this.createUser.bind(this);
+    this.updateUser = this.updateUser.bind(this);
   }
   async createUser(credentials) {
     try {
       if (!credentials.username || !credentials.password || !credentials.email) {
         throw new Error('Bad request');
       }
-      // TODO: ADD validator
-      const hashedPassword = await bcrypt.hash(credentials.password, 12);
-      delete credentials.password;
-      credentials.hashed_password = hashedPassword;
-      const user = await this.userRepository.create(credentials);
+      const validatedCredentials = await this.userValidator.validate(credentials, 'create');
+      const hashedPassword = await bcrypt.hash(validatedCredentials.password, 12);
+      delete validatedCredentials.password;
+      validatedCredentials.hashed_password = hashedPassword;
+      const user = await this.userRepository.create(validatedCredentials);
       delete user.hashed_password;
       return user;
     } catch (error) {
