@@ -1,6 +1,7 @@
 class AuthenticationController {
   constructor({ AuthenticationService }) {
     this.authenticationService = AuthenticationService;
+    this.login = this.login.bind(this);
   }
   async login(req, res) {
     try {

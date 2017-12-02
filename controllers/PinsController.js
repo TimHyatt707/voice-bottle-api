@@ -3,6 +3,10 @@ class PinsController {
     this.pinService = PinService;
     this.upvoteService = UpvoteService;
     this.errorHandler = this.errorHandler.bind(this);
+    this.getPinsByLocation = this.getPinsByLocation.bind(this);
+    this.getUpvotes = this.getUpvotes.bind(this);
+    this.updatePin = this.updatePin.bind(this);
+    this.deletePin = this.deletePin.bind(this);
   }
 
   async getPinsByLocation(req, res) {

@@ -2,6 +2,8 @@ class UpvotesController {
   constructor({ UpvoteService }) {
     this.upvoteService = UpvoteService;
     this.errorHandler = this.errorHandler.bind(this);
+    this.createUpvote = this.createUpvote.bind(this);
+    this.deleteUpvote = this.deleteUpvote.bind(this);
   }
   async createUpvote(req, res) {
     try {

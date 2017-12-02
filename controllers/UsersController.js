@@ -3,6 +3,10 @@ class UsersController {
     this.userService = UserService;
     this.pinService = PinService;
     this.errorHandler = this.errorHandler.bind(this);
+    this.createUser = this.createUser.bind(this);
+    this.getPinsByUser = this.getPinsByUser.bind(this);
+    this.createPin = this.createPin.bind(this);
+    this.updateUser = this.updateUser.bind(this);
   }
   async getPinsByUser(req, res) {
     try {
@@ -48,6 +52,8 @@ class UsersController {
       case 'Bad token':
         return 401;
       case 'User not found':
+        return 404;
+      case 'Pin not found':
         return 404;
       default:
         return 500;
