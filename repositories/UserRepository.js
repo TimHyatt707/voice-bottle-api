@@ -34,7 +34,7 @@ class UserRepository {
       if (!record.length) throw new Error('Username/email already exists');
       return record[0];
     } catch (error) {
-      if (error.message === 'Username/email already exists') {
+      if (error.message.startsWith('insert')) {
         throw new Error('Username/email already exists');
       } else throw new Error('Something went wrong');
     }

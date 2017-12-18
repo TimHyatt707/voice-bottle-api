@@ -7,7 +7,6 @@ class PinRepository {
       const records = await this.db('pins')
         .where('user_id', id)
         .returning('*');
-      console.log(id, records);
       if (!records.length) throw new Error('Pin not found');
       return records;
     } catch (error) {
@@ -15,22 +14,22 @@ class PinRepository {
       throw new Error('Something went wrong');
     }
   }
-  async getByLocation(coordinates) {
+  async getByLocation(coords) {
     try {
-      coordinates = coordinates.split(',');
+      const coordinates = coords.coordinates.split(',');
       const pins = [];
       const lat = parseFloat(coordinates[0]);
       const long = parseFloat(coordinates[1]);
-      const poslat = lat + 0.016;
-      const neglat = lat - 0.016;
-      const poslong = long + 0.02;
-      const neglong = long - 0.02;
+      const poslat = lat + 0.04;
+      const neglat = lat - 0.04;
+      const poslong = long + 0.01;
+      const neglong = long - 0.01;
       const records = await this.db('pins').returning('*');
       for (let i = 0; i < records.length; i++) {
-        let coords = records[i].coordinates;
-        coords = coords.split(',');
-        const pinlat = parseFloat(coords[0]);
-        const pinlong = parseFloat(coords[1]);
+        let latLng = records[i].coordinates;
+        latLng = latLng.split(',');
+        const pinlat = parseFloat(latLng[0]);
+        const pinlong = parseFloat(latLng[1]);
         if (pinlat <= poslat && pinlat >= neglat && pinlong <= poslong && pinlong >= neglong) {
           pins.push(records[i]);
         }

@@ -4,7 +4,7 @@ const knex = require('../../knex');
 
 const chai = require('chai');
 
-const expect = chai.expect;
+const { expect } = chai;
 
 const request = require('supertest')(server);
 

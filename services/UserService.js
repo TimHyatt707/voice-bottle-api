@@ -23,7 +23,7 @@ class UserService {
       delete user.hashed_password;
       return user;
     } catch (error) {
-      throw new Error(this.errorHandler(error));
+      return Error(this.errorHandler(error));
     }
   }
   async updateUser(token, changes) {
@@ -37,11 +37,13 @@ class UserService {
       delete updatedUser.hashed_password;
       return updatedUser;
     } catch (error) {
-      throw new Error(this.errorHandler(error));
+      return this.errorHandler(error);
     }
   }
   errorHandler(error) {
     switch (error.message) {
+      case 'Username/email already exists':
+        return 'Bad request';
       case 'Bad request':
         return 'Bad request';
       case 'Bad token':

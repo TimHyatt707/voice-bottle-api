@@ -51,6 +51,8 @@ class UsersController {
         return 400;
       case 'Bad token':
         return 401;
+      case 'Username/email already exists':
+        return 400;
       case 'User not found':
         return 404;
       case 'Pin not found':

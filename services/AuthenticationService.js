@@ -27,7 +27,8 @@ class AuthenticationService {
         },
         secret.JWT_KEY,
       );
-      return { token };
+      const id = user.id;
+      return { token, id };
     } catch (error) {
       if (error.message === 'Invalid username/password') {
         throw new Error('Invalid username/password');

@@ -57,7 +57,7 @@ class PinService {
   async deletePin(token, pinid) {
     try {
       const authentication = jwt.verify(token, secret.JWT_KEY);
-      if (authentication) throw new Error('Bad token');
+      if (!authentication) throw new Error('Bad token');
       const pinVerification = await this.pinRepository.getById(pinid);
       if (pinVerification.user_id !== authentication.sub) throw new Error('Bad token');
       const pin = await this.pinRepository.delete(pinid);

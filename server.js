@@ -24,7 +24,7 @@ server.use(usersRouter);
 server.use(pinsRouter);
 server.use(upvotesRouter);
 
-server.all('*', (res) => {
+server.all('*', (req, res) => {
   res.sendStatus('405');
 });
 
