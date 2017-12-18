@@ -7,7 +7,7 @@ exports.up = knex =>
       .inTable('users')
       .notNullable()
       .onDelete('CASCADE');
-    t.string('message_url').notNullable();
+    t.string('message').notNullable();
     t.string('coordinates').notNullable();
     t.string('name');
   });

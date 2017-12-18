@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon",
+    "start:dev": "nodemon",
     "test": "mocha",
     "knex": "knex"
   },
