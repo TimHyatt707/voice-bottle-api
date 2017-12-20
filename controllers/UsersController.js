@@ -29,12 +29,10 @@ class UsersController {
 
   async createPin(req, res) {
     try {
-      console.log(req.body);
       const token = req.get('Authorization');
       const pin = await this.pinService.createPin(token, req.body);
       res.json(pin);
     } catch (error) {
-      console.log(error.message);
       res.sendStatus(this.errorHandler(error));
     }
   }

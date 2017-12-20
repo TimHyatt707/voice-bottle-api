@@ -55,10 +55,8 @@ class PinRepository {
       const record = await this.db('pins')
         .insert(data)
         .returning('*');
-      console.log(record);
       return record[0];
     } catch (error) {
-      console.log(error.message, 'in repo layer');
       throw new Error(error.message);
     }
   }

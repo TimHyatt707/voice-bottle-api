@@ -33,15 +33,12 @@ class PinService {
   async createPin(token, data) {
     try {
       const authentication = jwt.verify(token, secret.JWT_KEY);
-      console.log(authentication, 'auth in service layer');
       if (!authentication) throw new Error('Bad token');
       const id = authentication.sub;
       data.user_id = id;
       const pin = await this.pinRepository.create(data);
-      console.log(pin, 'in service layer');
       return pin;
     } catch (error) {
-      console.log(error.message);
       throw new Error(this.errorHandler(error));
     }
   }
