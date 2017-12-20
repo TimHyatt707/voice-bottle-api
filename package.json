@@ -4,7 +4,7 @@
   "description": "REST API for the voice-bottle react-native application",
   "main": "server.js",
   "scripts": {
-    "start": "node",
+    "start": "nodemon",
     "start:dev": "nodemon",
     "test": "mocha",
     "knex": "knex"

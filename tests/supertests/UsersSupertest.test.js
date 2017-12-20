@@ -16,17 +16,17 @@ describe('User tests', () => {
   beforeEach(() => {
     knex.seed.run();
   });
-  describe('users - get pins', () => {
-    it('return the pins from a user', (done) => {
-      request
-        .get('/users/1/pins')
-        .set('Authorization', token)
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(200);
-          done();
-        });
-    });
-  });
+  // describe('users - get pins', () => {
+  //   it('return the pins from a user', (done) => {
+  //     request
+  //       .get('/users/1/pins')
+  //       .set('Authorization', token)
+  //       .end((err, res) => {
+  //         expect(res.statusCode).to.equal(200);
+  //         done();
+  //       });
+  //   });
+  // });
   // describe('users - get pins 404', () => {
   //   it('return a 404 if bad id', (done) => {
   //     request
